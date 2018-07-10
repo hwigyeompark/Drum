@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<section class="keys">
+    <div class="key" data-key="65"></div>
+    <div class="key" data-key="83"></div>
+    <div class="key" data-key="68"></div>
+    <div class="key" data-key="70"></div>
+    <div class="key" data-key="71"></div>
+</section>
+
+<audio data-key="65"></audio>
+<audio data-key="83"></audio>
+<audio data-key="68"></audio>
+<audio data-key="70"></audio>
+<audio data-key="71"></audio>
+</body>
+</html>
+<script>
+    window.addEventListener(
+        'keydown',
+        event=>{
+            const div = document.querySelector(`div[data-key="${event.keyCode}"]`);
+            const audio = document.querySelector(`audio[data-key="${event.keyCode}"]`);
+
+            div.classList.add("keydown");
+            div.addEventListener("transitionend", () => {
+                div.classList.remove("keydown")
+            });
+            audio.currentTime = 0;
+            audio.play();
+        }
+    );
+</script>
+
+<style>
+    html{
+        background-image: url("back.jpg");
+        background-size: cover;
+        background-repeat: none;
+    }
+
+    body{
+        margin: 0;
+    }
+
+    .key{
+        border: .5rem solid silver;
+        width: 3rem;
+        height: 3rem;
+        margin: 1rem;
+        background: #000000;
+        transition: all .1s ease-in;
+    }
+
+    .keydown{
+        border-color: yellow;
+        transform: scale(1.5);
+    }
+
+    .keys{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+</style>
